@@ -15,15 +15,27 @@ public class ExternalFactorService {
     }
 
     public double getFactor(){
+        try {
+            double retriedFactor = getRetriedFactor();
+            saveInCache(retriedFactor);
+            return retriedFactor;
+        } catch (RuntimeException e){
+            System.out.println("Returning cached Value");
+            return cachedValue;
+        }
+    }
+
+    private double getRetriedFactor() {
         int attempts = 0;
         while(attempts < 3) {
             try {
                 return fetchedFactor();
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 attempts++;
             }
         }
-        throw new RuntimeException("Failed Retries");
+        throw new RuntimeException("Failed retries");
     }
 
     private double fetchedFactor() {
@@ -32,5 +44,11 @@ public class ExternalFactorService {
                 .retrieve()
                 .body(Factor.class);
         return (value != null) ? value.factor : 1;
+    }
+
+    private double cachedValue;
+
+    private void saveInCache(double value) {
+        cachedValue = value;
     }
 }

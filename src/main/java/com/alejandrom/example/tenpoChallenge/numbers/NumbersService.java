@@ -13,7 +13,7 @@ public class NumbersService {
         this.externalFactorService = externalFactorService;
     }
 
-    public double getOperation(Integer num1, Integer num2){
-        return (num1.doubleValue() + num2.doubleValue()) * externalFactorService.getFactor();
+    public double getOperation(double num1, double num2){
+        return (num1 + num2) * externalFactorService.getFactor();
     }
 }

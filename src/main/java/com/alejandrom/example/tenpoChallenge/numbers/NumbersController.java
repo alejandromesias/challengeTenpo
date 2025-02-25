@@ -21,7 +21,7 @@ public class NumbersController {
     }
 
     @GetMapping
-    public double getResult(@RequestParam Integer num1, @RequestParam Integer num2){
+    public double getResult(@RequestParam double num1, @RequestParam double num2){
         double response = numbersService.getOperation(num1, num2);
         historyRecordService.addNewRecord("challenge/api/numbers", num1, num2, response);
         return response;

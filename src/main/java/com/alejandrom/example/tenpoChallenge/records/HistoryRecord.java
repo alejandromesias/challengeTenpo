@@ -21,15 +21,15 @@ public class HistoryRecord {
     private Long id;
     private LocalDateTime dateTime;
     private String endpoint;
-    private int num1;
-    private int num2;
+    private double num1;
+    private double num2;
     private double response;
     private String error;
 
     public HistoryRecord() {
     }
 
-    public HistoryRecord(LocalDateTime dateTime, String endpoint, int num1, int num2, double response, String error) {
+    public HistoryRecord(LocalDateTime dateTime, String endpoint, double num1, double num2, double response, String error) {
         this.dateTime = dateTime;
         this.endpoint = endpoint;
         this.num1 = num1;
@@ -62,19 +62,19 @@ public class HistoryRecord {
         this.endpoint = endpoint;
     }
 
-    public int getNum1() {
+    public double getNum1() {
         return num1;
     }
 
-    public void setNum1(int num1) {
+    public void setNum1(double num1) {
         this.num1 = num1;
     }
 
-    public int getNum2() {
+    public double getNum2() {
         return num2;
     }
 
-    public void setNum2(int num2) {
+    public void setNum2(double num2) {
         this.num2 = num2;
     }
 

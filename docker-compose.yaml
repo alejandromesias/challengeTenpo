@@ -1,0 +1,27 @@
+services:
+  database:
+    container_name: database
+    image: postgres:17.4
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
+      interval: 3s
+      timeout: 60s
+      retries: 10
+      start_period: 1s
+  tenpo-api:
+    container_name: tenpo-app
+    image: local/tenpo-challenge:1
+    ports:
+      - 8080:8080
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/postgres

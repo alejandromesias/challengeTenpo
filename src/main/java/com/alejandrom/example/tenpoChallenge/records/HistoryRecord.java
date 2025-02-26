@@ -2,40 +2,38 @@ package com.alejandrom.example.tenpoChallenge.records;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table
+// TODO: this should be a java record
 public class HistoryRecord {
     @Id
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
+            name = "history_sequence",
+            sequenceName = "history_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            generator = "history_sequence"
     )
     private Long id;
     private LocalDateTime dateTime;
-    private String endpoint;
-    private double num1;
-    private double num2;
-    private double response;
-    private String error;
+    private String method;
+    private String path;
+    private String params;
+    private Integer responseCode;
 
     public HistoryRecord() {
     }
 
-    public HistoryRecord(LocalDateTime dateTime, String endpoint, double num1, double num2, double response, String error) {
+    public HistoryRecord(LocalDateTime dateTime, String method, String path, String params, Integer responseCode) {
         this.dateTime = dateTime;
-        this.endpoint = endpoint;
-        this.num1 = num1;
-        this.num2 = num2;
-        this.response = response;
-        this.error = error;
+        this.method = method;
+        this.path = path;
+        this.params = params;
+        this.responseCode = responseCode;
     }
 
     public Long getId() {
@@ -54,48 +52,35 @@ public class HistoryRecord {
         this.dateTime = dateTime;
     }
 
-    public String getEndpoint() {
-        return endpoint;
+    public String getMethod() {
+        return method;
     }
 
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
+    public void setMethod(String method) {
+        this.method = method;
     }
 
-    public double getNum1() {
-        return num1;
+    public String getPath() {
+        return path;
     }
 
-    public void setNum1(double num1) {
-        this.num1 = num1;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public double getNum2() {
-        return num2;
+    public String getParams() {
+        return params;
     }
 
-    public void setNum2(double num2) {
-        this.num2 = num2;
+    public void setParams(String params) {
+        this.params = params;
     }
 
-    public double getResponse() {
-        return response;
+    public Integer getResponseCode() {
+        return responseCode;
     }
 
-    public void setResponse(double response) {
-        this.response = response;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
+    public void setResponseCode(Integer responseCode) {
+        this.responseCode = responseCode;
     }
 }
